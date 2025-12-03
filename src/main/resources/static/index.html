@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taxi Company Management System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚕 Taxi Company Management System</h1>
+            <nav class="main-nav">
+                <button class="nav-btn active" data-page="drivers">Drivers</button>
+                <button class="nav-btn" data-page="cars">Cars</button>
+                <button class="nav-btn" data-page="customers">Customers</button>
+                <button class="nav-btn" data-page="trips">Trips</button>
+                <button class="nav-btn" data-page="shifts">Shifts</button>
+                <button class="nav-btn" data-page="reports">Reports</button>
+            </nav>
+        </header>
+
+        <main>
+            <!-- Drivers Section -->
+            <section id="drivers" class="content-section active">
+                <h2>Driver Management</h2>
+                <div class="action-bar">
+                    <button class="btn btn-primary" onclick="DriverManager.showCreateForm()">Add New Driver</button>
+                </div>
+                <div id="drivers-table-container"></div>
+            </section>
+
+            <!-- Cars Section -->
+            <section id="cars" class="content-section">
+                <h2>Car Management</h2>
+                <div class="action-bar">
+                    <button class="btn btn-primary" onclick="CarManager.showCreateForm()">Add New Car</button>
+                </div>
+                <div id="cars-table-container"></div>
+            </section>
+
+            <!-- Customers Section -->
+            <section id="customers" class="content-section">
+                <h2>Customer Management</h2>
+                <div class="action-bar">
+                    <button class="btn btn-primary" onclick="CustomerManager.showCreateForm()">Add New Customer</button>
+                </div>
+                <div id="customers-table-container"></div>
+            </section>
+
+            <!-- Trips Section -->
+            <section id="trips" class="content-section">
+                <h2>Trip Management</h2>
+                <div class="action-bar">
+                    <button class="btn btn-primary" onclick="TripManager.showCreateForm()">Add New Trip</button>
+                </div>
+                <div id="trips-table-container"></div>
+            </section>
+
+            <!-- Shifts Section -->
+            <section id="shifts" class="content-section">
+                <h2>Shift Management</h2>
+                <div class="action-bar">
+                    <button class="btn btn-primary" onclick="ShiftManager.showCreateForm()">Add New Shift</button>
+                </div>
+                <div id="shifts-table-container"></div>
+            </section>
+
+            <!-- Reports Section -->
+            <section id="reports" class="content-section">
+                <h2>📊 Reports & Analytics</h2>
+                <div class="reports-grid">
+                    <div class="report-card" onclick="ReportsManager.loadRevenueByDriver()">
+                        <h3>💰 Revenue by Driver</h3>
+                        <p>Total revenue and trip count per driver</p>
+                    </div>
+                    <div class="report-card" onclick="ReportsManager.loadPopularPickupLocations()">
+                        <h3>📍 Popular Pickup Locations</h3>
+                        <p>Most frequent pickup spots</p>
+                    </div>
+                    <div class="report-card" onclick="ReportsManager.loadActiveDriversWithCars()">
+                        <h3>🚗 Active Drivers & Cars</h3>
+                        <p>Currently active driver-car assignments</p>
+                    </div>
+                    <div class="report-card" onclick="ReportsManager.loadCustomerTripHistory()">
+                        <h3>👥 Customer Trip History</h3>
+                        <p>Complete trip history with payment details</p>
+                    </div>
+                    <div class="report-card" onclick="ReportsManager.loadCarUtilization()">
+                        <h3>📈 Car Utilization</h3>
+                        <p>Statistics on car usage and revenue</p>
+                    </div>
+                    <div class="report-card" onclick="ReportsManager.loadPendingPayments()">
+                        <h3>💳 Payment Status Summary</h3>
+                        <p>Breakdown by payment status</p>
+                    </div>
+                    <div class="report-card" onclick="ReportsManager.loadDailyRevenue()">
+                        <h3>📅 Daily Revenue Report</h3>
+                        <p>Revenue trends by day</p>
+                    </div>
+                    <div class="report-card" onclick="ReportsManager.loadTopCustomers()">
+                        <h3>⭐ Top Customers</h3>
+                        <p>Highest spending customers</p>
+                    </div>
+                </div>
+                <div id="reports-results-container"></div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal for forms -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <script src="api.js"></script>
+    <script src="driver-manager.js"></script>
+    <script src="car-manager.js"></script>
+    <script src="customer-manager.js"></script>
+    <script src="trip-manager.js"></script>
+    <script src="shift-manager.js"></script>
+    <script src="reports-manager.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
+

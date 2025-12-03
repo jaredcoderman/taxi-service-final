@@ -1,0 +1,29 @@
+# Database Configuration
+# Option 1: Using Docker (recommended - easiest setup)
+# Just run: docker-compose up
+spring.datasource.url=jdbc:mariadb://localhost:3306/taxi_company
+spring.datasource.username=root
+spring.datasource.password=rootpassword
+spring.datasource.driver-class-name=org.mariadb.jdbc.Driver
+
+# Option 2: Using local MariaDB installation
+# Uncomment and update if you have MariaDB installed locally:
+# spring.datasource.url=jdbc:mariadb://localhost:3306/taxi_company
+# spring.datasource.username=your_username
+# spring.datasource.password=your_password
+
+# JPA/Hibernate Configuration
+spring.jpa.hibernate.ddl-auto=none
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.format_sql=true
+
+# Naming strategy - preserve exact case for table and column names
+spring.jpa.hibernate.naming.physical-strategy=org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+spring.jpa.properties.hibernate.physical_naming_strategy=org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+# Use backticks to preserve case sensitivity in MariaDB
+spring.jpa.properties.hibernate.globally_quoted_identifiers=true
+
+# Static resources configuration
+spring.web.resources.static-locations=classpath:/static/
+spring.web.resources.add-mappings=true
+
