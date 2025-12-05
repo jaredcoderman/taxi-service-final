@@ -116,58 +116,6 @@ To also remove the data volume:
 docker compose down -v
 ```
 
----
-
-## Alternative Setup (Without Docker)
-
-If you prefer not to use Docker, you can install MariaDB locally:
-
-### Step 1: Install MariaDB
-
-- **Windows**: Download from [MariaDB Downloads](https://mariadb.org/download/)
-- **Mac**: `brew install mariadb`
-- **Linux**: `sudo apt-get install mariadb-server` (Ubuntu/Debian) or `sudo yum install mariadb-server` (CentOS/RHEL)
-
-### Step 2: Start MariaDB
-
-```bash
-# Windows: Start from Services or use MariaDB command prompt
-# Mac/Linux:
-sudo systemctl start mariadb  # or: sudo service mariadb start
-```
-
-### Step 3: Create Database and Tables
-
-Connect to MariaDB:
-```bash
-mysql -u root -p
-```
-
-Run the initialization script:
-```bash
-mysql -u root -p < src/main/resources/db/init.sql
-```
-
-Or manually:
-```sql
-CREATE DATABASE taxi_company;
-USE taxi_company;
--- Then copy/paste the SQL from src/main/resources/db/init.sql
-```
-
-### Step 4: Configure Application
-
-1. Copy `src/main/resources/application.properties.example` to `src/main/resources/application.properties`
-2. Update the database credentials in `application.properties`:
-   ```properties
-   spring.datasource.username=your_username
-   spring.datasource.password=your_password
-   ```
-
-### Step 5: Run the Application
-
-Same as Step 3 in the Docker setup above.
-
 ## Project Structure
 
 ```
@@ -203,65 +151,6 @@ The application provides RESTful APIs for all entities:
 All endpoints support standard CRUD operations (GET, POST, PUT, DELETE).
 
 For detailed API testing instructions, see [TESTING_GUIDE.md](TESTING_GUIDE.md).
-
-## Troubleshooting
-
-### Docker Issues
-
-**"The system cannot find the file specified" or "Cannot connect to Docker daemon":**
-- **Docker Desktop is not running!** Start Docker Desktop application and wait for it to fully initialize
-- Check Docker is running: `docker ps` (should not give an error)
-- On Windows/Mac, look for the Docker whale icon in your system tray
-
-**Port 3306 already in use:**
-- Stop any local MariaDB/MySQL services
-- Or change the port in `docker-compose.yml`: `"3307:3306"` and update `application.properties`
-
-**Container won't start:**
-- Check Docker is running: `docker ps`
-- Check logs: `docker compose logs mariadb` or `docker-compose logs mariadb`
-
-### Application Won't Start
-
-- **Check Java version**: `java -version` (needs 17+)
-- **Check database connection**: Ensure MariaDB is running (Docker or local)
-- **Check port 8080**: Ensure it's not in use
-
-### Database Connection Errors
-
-- **Docker**: Ensure `docker compose up` is running
-- **Local**: Verify MariaDB service is running
-- Check credentials in `application.properties`
-
-### Maven Wrapper Issues on Windows
-
-- **Git Bash/PowerShell/WSL**: Use `./mvnw spring-boot:run`
-- **Command Prompt**: Use `mvnw.cmd spring-boot:run`
-- If neither works, ensure you're in the project root directory
-
-## Development
-
-### Building the Project
-
-```bash
-./mvnw clean package
-```
-
-Or on Windows Command Prompt:
-```bash
-mvnw.cmd clean package
-```
-
-### Running Tests
-
-```bash
-./mvnw test
-```
-
-Or on Windows Command Prompt:
-```bash
-mvnw.cmd test
-```
 
 ## License
 
