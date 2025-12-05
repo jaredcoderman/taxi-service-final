@@ -17,10 +17,10 @@ const TripManager = {
             return;
         }
 
-        let html = '<table><thead><tr>';
+        let html = '<div class="table-wrapper"><table class="trips-table"><thead><tr>';
         html += '<th>ID</th><th>Customer ID</th><th>Driver ID</th><th>Car ID</th>';
         html += '<th>Pickup Location</th><th>Dropoff Location</th><th>Request Time</th>';
-        html += '<th>Pickup Time</th><th>Dropoff Time</th><th>Fare Amount</th><th>Payment Status</th><th>Actions</th>';
+        html += '<th>Pickup Time</th><th>Dropoff Time</th><th>Fare Amount</th><th>Payment Status</th><th class="sticky-actions">Actions</th>';
         html += '</tr></thead><tbody>';
 
         trips.forEach(trip => {
@@ -36,14 +36,14 @@ const TripManager = {
                 <td>${trip.dropoffTime ? new Date(trip.dropoffTime).toLocaleString() : ''}</td>
                 <td>${trip.fareAmount ? '$' + parseFloat(trip.fareAmount).toFixed(2) : ''}</td>
                 <td>${trip.paymentStatus || ''}</td>
-                <td>
+                <td class="sticky-actions">
                     <button class="btn btn-warning" onclick="TripManager.showEditForm(${trip.tripID})">Edit</button>
                     <button class="btn btn-danger" onclick="TripManager.deleteTrip(${trip.tripID})">Delete</button>
                 </td>
             </tr>`;
         });
 
-        html += '</tbody></table>';
+        html += '</tbody></table></div>';
         container.innerHTML = html;
     },
 

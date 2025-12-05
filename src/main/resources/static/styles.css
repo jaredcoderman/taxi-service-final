@@ -178,9 +178,59 @@ table {
     background: rgba(20, 25, 45, 0.8);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     border-radius: 8px;
-    overflow-x: auto;
     border: 1px solid rgba(255, 200, 0, 0.2);
     table-layout: auto;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+    overflow-y: visible;
+    margin-top: 20px;
+    border-radius: 8px;
+    position: relative;
+}
+
+.table-wrapper::-webkit-scrollbar {
+    height: 12px;
+}
+
+.table-wrapper::-webkit-scrollbar-track {
+    background: rgba(20, 25, 45, 0.5);
+    border-radius: 6px;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb {
+    background: rgba(255, 200, 0, 0.3);
+    border-radius: 6px;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 200, 0, 0.5);
+}
+
+.trips-table {
+    min-width: 100%;
+}
+
+.sticky-actions {
+    position: sticky;
+    right: 0;
+    background: rgba(20, 25, 45, 0.95);
+    z-index: 10;
+    white-space: nowrap;
+    min-width: 150px;
+}
+
+.trips-table thead .sticky-actions {
+    background: linear-gradient(135deg, #2d1b3d 0%, #1a2332 100%);
+}
+
+.trips-table tbody .sticky-actions {
+    background: rgba(26, 31, 58, 0.95);
+}
+
+.trips-table tbody tr:hover .sticky-actions {
+    background: rgba(255, 200, 0, 0.15);
 }
 
 thead {

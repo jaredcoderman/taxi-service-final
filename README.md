@@ -23,17 +23,28 @@ A full-stack web application for managing a taxi company's operations, built wit
 
 - **Java 17** or higher
 - **Maven** (or use the included Maven wrapper)
-- **Docker** (recommended for easiest setup) OR **MariaDB** installed locally
+- **Docker Desktop** (recommended for easiest setup) - **Make sure Docker Desktop is running!** OR **MariaDB** installed locally
 
 ## Quick Start (Easiest Method - Using Docker)
+
+### Step 0: Ensure Docker Desktop is Running
+
+**Important**: Before running docker commands, make sure Docker Desktop is installed and running on your system.
+
+- **Windows/Mac**: Open Docker Desktop application and wait for it to fully start (whale icon in system tray should be steady)
+- **Linux**: Ensure Docker daemon is running: `sudo systemctl status docker`
+
+If you get an error like "The system cannot find the file specified" or "Cannot connect to Docker daemon", Docker Desktop is not running.
 
 ### Step 1: Start the Database
 
 Open a terminal in the project directory and run:
 
 ```bash
-docker-compose up -d
+docker compose up -d
 ```
+
+**Note**: Use `docker compose` (with space) for newer Docker versions, or `docker-compose` (with hyphen) for older versions. Both work the same way.
 
 This will:
 - Download and start MariaDB automatically
@@ -50,12 +61,12 @@ The database will be available at `localhost:3306` with:
 
 Copy the example properties file:
 
-**Windows:**
+**Windows (Command Prompt):**
 ```bash
 copy src\main\resources\application.properties.example src\main\resources\application.properties
 ```
 
-**Linux/Mac:**
+**Windows (Git Bash/PowerShell/WSL) or Linux/Mac:**
 ```bash
 cp src/main/resources/application.properties.example src/main/resources/application.properties
 ```
@@ -64,7 +75,12 @@ The default configuration already works with Docker! No changes needed.
 
 ### Step 3: Run the Application
 
-**Windows:**
+**Windows (Git Bash/PowerShell/WSL):**
+```bash
+./mvnw spring-boot:run
+```
+
+**Windows (Command Prompt):**
 ```bash
 mvnw.cmd spring-boot:run
 ```
@@ -74,7 +90,7 @@ mvnw.cmd spring-boot:run
 ./mvnw spring-boot:run
 ```
 
-Or using Maven (if installed):
+Or using Maven (if installed globally):
 ```bash
 mvn spring-boot:run
 ```
@@ -87,12 +103,17 @@ Open your browser and go to: `http://localhost:8080`
 
 When you're done, stop the database with:
 ```bash
+docker compose down
+```
+
+Or with the hyphenated version:
+```bash
 docker-compose down
 ```
 
 To also remove the data volume:
 ```bash
-docker-compose down -v
+docker compose down -v
 ```
 
 ---
@@ -187,13 +208,18 @@ For detailed API testing instructions, see [TESTING_GUIDE.md](TESTING_GUIDE.md).
 
 ### Docker Issues
 
+**"The system cannot find the file specified" or "Cannot connect to Docker daemon":**
+- **Docker Desktop is not running!** Start Docker Desktop application and wait for it to fully initialize
+- Check Docker is running: `docker ps` (should not give an error)
+- On Windows/Mac, look for the Docker whale icon in your system tray
+
 **Port 3306 already in use:**
 - Stop any local MariaDB/MySQL services
 - Or change the port in `docker-compose.yml`: `"3307:3306"` and update `application.properties`
 
 **Container won't start:**
 - Check Docker is running: `docker ps`
-- Check logs: `docker-compose logs mariadb`
+- Check logs: `docker compose logs mariadb` or `docker-compose logs mariadb`
 
 ### Application Won't Start
 
@@ -203,22 +229,38 @@ For detailed API testing instructions, see [TESTING_GUIDE.md](TESTING_GUIDE.md).
 
 ### Database Connection Errors
 
-- **Docker**: Ensure `docker-compose up` is running
+- **Docker**: Ensure `docker compose up` is running
 - **Local**: Verify MariaDB service is running
 - Check credentials in `application.properties`
+
+### Maven Wrapper Issues on Windows
+
+- **Git Bash/PowerShell/WSL**: Use `./mvnw spring-boot:run`
+- **Command Prompt**: Use `mvnw.cmd spring-boot:run`
+- If neither works, ensure you're in the project root directory
 
 ## Development
 
 ### Building the Project
 
 ```bash
-mvn clean package
+./mvnw clean package
+```
+
+Or on Windows Command Prompt:
+```bash
+mvnw.cmd clean package
 ```
 
 ### Running Tests
 
 ```bash
-mvn test
+./mvnw test
+```
+
+Or on Windows Command Prompt:
+```bash
+mvnw.cmd test
 ```
 
 ## License
